@@ -37,8 +37,8 @@ set tw=79		" width of document
 " colors
 set background=dark
 set colorcolumn=80
-let g:solarized_termtran1=1
-let g:solarized_termcolors=256
+"let g:solarized_termtran1=1
+"let g:solarized_termcolors=256
 colorscheme solarized
 highlight ColorColumn ctermbg=233
 
