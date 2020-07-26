@@ -33,7 +33,11 @@ set showbreak=▶▶▶	" show line break
 set tw=79		" width of document
 "set nowrap		" don't automatically wrap on load
 "set fo-=t		" don't automatically wrap text when typing
+
+" colors
+set background=dark
 set colorcolumn=80
+colorscheme desert
 highlight ColorColumn ctermbg=233
 
 " set status line
