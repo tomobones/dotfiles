@@ -1,0 +1,30 @@
+unmailboxes *
+
+# IMAP settings
+#set imap_idle
+#set imap_passive
+set imap_user = "thomas.vogg@gmx.de"
+set imap_pass = `pass gmx.net`
+set from = "thomas.vogg@gmx.de"
+set realname = "Thomas Vogg"
+set folder = "imaps://thomas.vogg@gmx.de@imap.gmx.net"
+set postponed = "+Entwürfe"
+set trash = "+Papierkorb"
+set record = "+Gesendet"
+set spoolfile = "+INBOX"
+set header_cache = ~/.config/mutt/net.gmx.thomas.vogg/cache/headers
+set message_cachedir = ~/.config/mutt/net.gmx.thomas.vogg/cache/bodies
+
+mailboxes "+INBOX"
+mailboxes "+Gesendet"
+mailboxes "+Entwürfe"
+mailboxes "+Trash"
+mailboxes "+Papierkorb"
+
+# SMTP settings
+set smtp_url = "smtp://thomas.vogg@gmx.de@mail.gmx.net:587"
+set smtp_pass = `pass gmx.net`
+set ssl_starttls = yes
+
+#set certificate_file = ~/.config/mutt/net.gmx.thomas.vogg/certificates
+#set status_format = "$from -%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---"

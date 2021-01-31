@@ -1,47 +1,69 @@
 # Mutt configuration template
-# IMAP settings
-set folder = "imaps://thomas.vogg@gmx.de@imap.gmx.net:993"
-set imap_user = "thomas.vogg@gmx.de"
-set imap_pass = "password"
+
+# Folder hooks
+folder-hook 'account.de.posteo.thomas.vogg' 'source ~/.config/mutt/account.de.posteo.thomas.vogg'
+folder-hook 'account.net.gmx.thomas.vogg' 'source ~/.config/mutt/account.net.gmx.thomas.vogg'
+
+# Default account
+source ~/.config/mutt/account.de.posteo.thomas.vogg
+
+# Macros for switching accounts
+
+macro index \e1 '<sync-mailbox><enter-command>source ~/.config/mutt/account.de.posteo.thomas.vogg<enter><change-folder>!<enter>'
+macro index \e2 '<sync-mailbox><enter-command>source ~/.config/mutt/account.net.gmx.thomas.vogg<enter><change-folder>!<enter>'
+
+#-------- common config
 set imap_check_subscribed = yes
 set imap_list_subscribed = yes
-set timeout = 15
-set mail_check = 90
-set imap_keepalive = 180
-unset imap_passive
-set imap_idle
-set from = "thomas.vogg@gmx.de"
-set realname = "Thomas Vogg"
+set timeout = 300
+set mail_check = 120
+set imap_keepalive = 300
+set meta_key = yes
 
-# SMTP settings
-set smtp_url = "smtp://thomas.vogg@gmx.de@mail.gmx.net:587"
-set smtp_pass = "password"
+
+#-------- New Basic Config {{{
+#------------------------------------------------------
 set ssl_starttls = yes
+set ssl_force_tls = yes
+set move = no
+set include
+set sort = 'threads'
+set sort_aux = 'reverse-last-date-received'
+set auto_tag = yes
+#ignore "Authentication-Results:"
+#ignore "DomainKey-Signature:"
+#ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+alternative_order text/plain text/html *
+auto_view text/html
+#bind editor <Tab> complete-query
+#bind editor ^T complete
+#bind editor <space> noop
+# }}}
+#------------------------------------------------------
 
-# Mailboxes
-set spoolfile = "+INBOX"
-mailboxes =INBOX =Sent =Trash =Drafts =Yunk
-set record = "+Sent"
-set trash = "+Trash"
-set postponed = "+Drafts"
+
 
 # Mail Editor
 set editor = vim
 
 # Display Sidebar
 set sidebar_width = 20
+set sidebar_divider_char = ' '
 set sidebar_visible = yes
+set sidebar_format = "%B%* %F:%N:%S"
 
-# If hcache is a filder, Mutt will create sub cache folders for each account which may speeds things up even more
+# If hcache is a folder, Mutt will create sub cache folders for each account which may speeds things up even more
 set header_cache = "~/.cache/mutt"
 
 # Store messages locally to speed things up, like searching message bodies
 set message_cachedir = "~/.cache/mutt"
 
 # Sidebar navigation
-# bind index.pager \CP sidebar-prev               # Ctrl-n Next Folder
-# bind index.pager \CN sidepar-next               # Ctrl-p Previous Folder
-# bind index.pager \CI sidepar-open               # Ctrl-i Open Folder
-# bind index.pager \CB sidepar-toggle_visible     # Ctrl-b Toggle Folder
+bind index,pager \CP sidebar-prev               # Ctrl-n Next Folder
+bind index,pager \CN sidebar-next               # Ctrl-p Previous Folder
+bind index,pager \CI sidebar-open               # Ctrl-i Open Folder
+bind index,pager \CB sidebar-toggle-visible     # Ctrl-b Toggle Folder
 
+# Include color configuration
 source /home/tomo/.config/mutt/color.muttrc
