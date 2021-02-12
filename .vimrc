@@ -18,7 +18,7 @@ noremap S :%s//g<Left><Left>
 " enable syntax highlighting
 filetype on
 filetype plugin indent on
-syntax on
+syntax enable
 
 " easier navigation through windows
 nmap <C-h> <C-w>h
@@ -56,16 +56,15 @@ set expandtab
 set cursorcolumn
 
 " colors
-set background=dark
 set colorcolumn=80
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 let g:solarized_termtrans=1
-let g:solarized_termcolors=256
-let g:solarized_bold = 1
-let g:solarized_degrade = 1
-let g:solarized_bold = 0 
-let g:solarized_underline = 0 
-let g:solarized_italic = 0 
-let g:solarized_contrast = "normal"
-let g:solarized_visibility= "normal"
+let g:solarized_termcolors=16
+let g:solarized_degrade=0
+let g:solarized_bold=0
+let g:solarized_underline=0
+let g:solarized_italic=0
+let g:solarized_contrast="normal"
+let g:solarized_visibility="normal"
+set background=dark
 colorscheme solarized
-highlight ColorColumn ctermbg=233
