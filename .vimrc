@@ -27,20 +27,12 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 
 " showing line numbers and length
-set number relativenumber 	" show in line and relative line numbers
+set number relativenumber       " show in line and relative line numbers
 set ruler " show line number in bottom line
-set showbreak=▶▶▶	" show line break
-set tw=79		" width of document
-"set nowrap		" don't automatically wrap on load
-"set fo-=t		" don't automatically wrap text when typing
-
-" colors
-set background=dark
-set colorcolumn=80
-"let g:solarized_termtran1=1
-"let g:solarized_termcolors=256
-colorscheme solarized
-highlight ColorColumn ctermbg=233
+set showbreak=▶▶▶       " show line break
+set tw=79               " width of document
+"set nowrap             " don't automatically wrap on load
+"set fo-=t              " don't automatically wrap text when typing
 
 " set status line
 set laststatus=2
@@ -63,10 +55,17 @@ set expandtab
 "set cursorline
 set cursorcolumn
 
-set wildmode=longest,list,full
-
-" make search case insensitive
-"set hlsearch
-"set incsearch
-"set ignorecase
-"set smartcase
+" colors
+set background=dark
+set colorcolumn=80
+let g:solarized_termtrans=1
+let g:solarized_termcolors=256
+let g:solarized_bold = 1
+let g:solarized_degrade = 1
+let g:solarized_bold = 0 
+let g:solarized_underline = 0 
+let g:solarized_italic = 0 
+let g:solarized_contrast = "normal"
+let g:solarized_visibility= "normal"
+colorscheme solarized
+highlight ColorColumn ctermbg=233
