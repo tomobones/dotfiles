@@ -1,3 +1,16 @@
+" enter the current millenium
+set nocompatible
+
+" search down in subfolders, povide tab-completion for all file-related tasks
+set path+=**
+
+" display all matches when tab completing in bottom line
+set wildmenu
+
+" create tags file
+" navigate through tags via ^], g^], ^t
+command! MakeTags !ctags -R .
+
 " better copy paste functionality
 set pastetoggle=<F2>
 set clipboard=unnamed
@@ -17,7 +30,7 @@ noremap S :%s//g<Left><Left>
 
 " enable syntax highlighting
 filetype on
-filetype plugin indent on
+filetype plugin on
 syntax enable
 
 " easier navigation through windows
@@ -30,7 +43,7 @@ nmap <C-k> <C-w>k
 set number relativenumber       " show in line and relative line numbers
 set ruler " show line number in bottom line
 set showbreak=▶▶▶       " show line break
-set tw=79               " width of document
+"set tw=79               " width of document
 "set nowrap             " don't automatically wrap on load
 "set fo-=t              " don't automatically wrap text when typing
 
@@ -68,3 +81,13 @@ let g:solarized_contrast="normal"
 let g:solarized_visibility="normal"
 set background=dark
 colorscheme solarized
+
+" tweaks for browsing
+" `:edit` <folder> opens file browser
+let g:netrw_banner=0            "disable annoying banner
+let g:netrw_browse_split=4      "open in prior window
+let g:netrw_altv=1              "open splits to the right
+let g:netrw_liststyle=3         "tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\s\s\)\zs\.\S\+'
+
