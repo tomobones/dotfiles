@@ -42,8 +42,8 @@ nmap <C-k> <C-w>k
 " showing line numbers and length
 set number relativenumber       " show in line and relative line numbers
 set ruler " show line number in bottom line
-set showbreak=▶▶▶       " show line break
-"set tw=79               " width of document
+set showbreak=NEWLINE   " show line break
+"set tw=79              " width of document
 "set nowrap             " don't automatically wrap on load
 "set fo-=t              " don't automatically wrap text when typing
 
@@ -83,11 +83,11 @@ set background=dark
 colorscheme solarized
 
 " tweaks for browsing
-" `:edit` <folder> opens file browser
+" `:edit <folder>` opens file browser
 let g:netrw_banner=0            "disable annoying banner
 let g:netrw_browse_split=4      "open in prior window
 let g:netrw_altv=1              "open splits to the right
 let g:netrw_liststyle=3         "tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\s\s\)\zs\.\S\+'
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
