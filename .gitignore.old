@@ -1,0 +1,10 @@
+*
+!.vimrc
+!.bashrc
+!.gitignore
+!/.vim/
+!/.vim/colors/
+!/.vim/colors/**
+!/.config/
+!/.config/**
+!/Solarized Dark.terminal

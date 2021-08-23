@@ -1,0 +1,17 @@
+set folder = "imaps://thomas.vogg@gmx.de@imap.gmx.net:993"
+set smtp_url = "smtp://thomas.vogg@gmx.de@mail.gmx.net:587"
+
+set smtp_pass = "$allyoucanmail123"
+set imap_pass = "$allyoucanmail123"
+
+set from = "thomas.vogg@gmx.de"
+set realname = "tomo bones"
+
+set spoolfile = "+INBOX"
+set record = "+Sent"
+set trash = "+Trash"
+set postponed = "+Drafts"
+
+mailboxes =INBOX =Sent =Trash =Drafts =Yunk
+
+source color.muttrc
