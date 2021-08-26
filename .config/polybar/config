@@ -18,7 +18,8 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #000
+;background = #000
+background = #aa000000
 ;background-alt = #444
 background-alt = #000
 ;foreground = ${xrdb:color7:#222}
@@ -50,8 +51,12 @@ border-color = #00000000
 padding-left = 0
 padding-right = 0
 
-module-margin-left = 1
+module-margin-left = 2
 module-margin-right = 2
+
+separator = "|"
+
+;dim-value = .5
 
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
@@ -59,7 +64,8 @@ font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm i3
 modules-center = mpd
-modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+;modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = filesystem xbacklight pavolume xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -87,8 +93,8 @@ label = %title:0:30:...%
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = "kb:"
+format-prefix-foreground = ${colors.foreground}
 format-prefix-underline = ${colors.secondary}
 
 label-layout = %layout%
@@ -101,13 +107,28 @@ label-indicator-underline = ${colors.secondary}
 
 [module/filesystem]
 type = internal/fs
-interval = 25
+interval = 10
 
 mount-0 = /
+mount-1 = /home
+;mount-2 = /var
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
+spacing = 4
+
+label-mounted = free:[%mountpoint%]%percentage_free%%
+label-unmounted = free:[%mountpoint%]not mounted
+label-unmounted-foreground = #55
+
+; Available tokens:
+;   %mountpoint%
+;   %type%
+;   %fsname%
+;   %percentage_free%
+;   %percentage_used%
+;   %total%
+;   %free%
+;   %used%
+; Default: %mountpoint% %percentage_free%%
 
 [module/bspwm]
 type = internal/bspwm
@@ -185,17 +206,19 @@ label-song-ellipsis = true
 [module/xbacklight]
 type = internal/xbacklight
 
-format = <label> <bar>
-label = BL
+;format = <label> <bar>
+format = <label>
+format-prefix = "light:"
+label = %percentage:2%%
 
 bar-width = 10
 bar-indicator = |
 bar-indicator-foreground = #fff
 bar-indicator-font = 2
-bar-fill = ─
+bar-fill = -
 bar-fill-font = 2
 bar-fill-foreground = #9f78e1
-bar-empty = ─
+bar-empty = -
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
@@ -207,16 +230,17 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = "cpu:"
+format-prefix-foreground = ${colors.foreground}
 format-underline = #f90000
-label = %percentage:2%%
+label = %percentage%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = "mem:"
+;format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground}
 format-underline = #4bffdc
 label = %percentage_used%%
 
@@ -225,9 +249,9 @@ type = internal/network
 interface = wlp58s0
 interval = 3.0
 
-format-connected = <ramp-signal> <label-connected>
+format-connected = <label-connected>
 format-connected-underline = #9f78e1
-label-connected = %essid%
+label-connected = wifi:%essid%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -260,12 +284,12 @@ format-disconnected =
 
 [module/date]
 type = internal/date
-interval = 5
+interval = 1
 
-date =
-date-alt = " %Y-%m-%d"
+date = " %d.%m.%Y"
+date-alt = " %Y.%m.%d"
 
-time = %H:%M
+time = %H:%M:%S
 time-alt = %H:%M:%S
 
 format-prefix = 
@@ -274,11 +298,21 @@ format-underline = #0a6cf5
 
 label = %date% %time%
 
+[module/pavolume]                                                               
+type = internal/pulseaudio                                                      
+
+;sink to be used, if it exists (find using `pacmd list-sinks`, name field)     
+sink = alsa_output.pci-0000_0e_00.4.iec958-stereo                               
+label-volume = vol:%percentage%%
+label-muted = vol:mute
+use-ui-max = false                                                              
+interval = 5
+
 [module/pulseaudio]
 type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
+label-volume = volume %percentage%%
 label-volume-foreground = ${root.foreground}
 
 label-muted = 🔇 muted
@@ -341,8 +375,8 @@ format-charging-underline = #ffb52a
 format-discharging = <animation-discharging> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-prefix = "bat:"
+format-full-prefix-foreground = ${colors.foreground}
 format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
@@ -367,7 +401,7 @@ type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
-format = <ramp> <label>
+format = <label>
 format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
