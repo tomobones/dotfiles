@@ -1,3 +1,13 @@
+call plug#begin('~/.vim/plugged')
+Plug 'vimwiki/vimwiki'
+call plug#end()
+
+" vimwiki
+let g:vimwiki_list = [{'path':'~/vimwiki/', 'syntax':'markdown', 'ext':'.md'}]
+" set nocompatible
+" filetype plugin on
+" syntax on
+
 " enter the current millenium
 set nocompatible
 
@@ -31,7 +41,7 @@ noremap S :%s//g<Left><Left>
 " enable syntax highlighting
 filetype on
 filetype plugin on
-syntax enable
+syntax on
 
 " easier navigation through windows
 nmap <C-h> <C-w>h
@@ -42,7 +52,9 @@ nmap <C-k> <C-w>k
 " showing line numbers and length
 set number relativenumber       " show in line and relative line numbers
 set ruler " show line number in bottom line
-set showbreak=NEWLINE   " show line break
+"let &showbreak = '>>>'
+let &showbreak = 'NEWLINE'
+set wrap
 "set tw=79              " width of document
 "set nowrap             " don't automatically wrap on load
 "set fo-=t              " don't automatically wrap text when typing
@@ -66,10 +78,10 @@ set shiftwidth=4
 set shiftround
 set expandtab
 "set cursorline
-set cursorcolumn
+"set cursorcolumn
 
 " colors
-set colorcolumn=80
+"set colorcolumn=80
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 let g:solarized_termtrans=1
 let g:solarized_termcolors=16
@@ -80,7 +92,13 @@ let g:solarized_italic=0
 let g:solarized_contrast="normal"
 let g:solarized_visibility="normal"
 set background=dark
-colorscheme solarized
+"colorscheme solarized
+colorscheme default
+
+"disable colors
+"syntax off
+"set nohlsearch
+"set t_Co=0
 
 " tweaks for browsing
 " `:edit <folder>` opens file browser
